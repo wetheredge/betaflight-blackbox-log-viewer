@@ -569,6 +569,13 @@ function adjustFieldDefsList(firmwareType, firmwareVersion) {
         }
         FLIGHT_LOG_FLIGHT_MODE_NAME = makeReadOnly(FLIGHT_LOG_FLIGHT_MODE_NAME);
 
+        // Flight state names
+        if (semver.gte(firmwareVersion, '4.3.0')) {
+            FLIGHT_LOG_FLIGHT_STATE_NAME = FLIGHT_LOG_FLIGHT_STATE_NAME.slice(0);
+            FLIGHT_LOG_FLIGHT_STATE_NAME.splice('CALIBRATE_MAG', 3, 'GPS_FIX_EVER');
+            FLIGHT_LOG_FLIGHT_STATE_NAME = makeReadOnly(FLIGHT_LOG_FLIGHT_STATE_NAME);
+        }
+
     } else {
         DEBUG_MODE = DEBUG_MODE_COMPLETE;
 
